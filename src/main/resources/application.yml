@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:tcp://localhost/~/code/kyh/mybatis
+#      jdbc-url: jdbc:h2:tcp://localhost/~/Desktop/week3/test
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      names: ${job.name:NONE}
