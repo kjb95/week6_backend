@@ -1,6 +1,5 @@
 package com.springbatch.config;
 
-import com.springbatch.TestBatchConfiguration;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.*;

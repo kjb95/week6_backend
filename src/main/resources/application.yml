@@ -11,3 +11,6 @@ spring:
       initialize-schema: always
     job:
       names: ${job.name:NONE}
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
