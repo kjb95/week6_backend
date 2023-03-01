@@ -32,6 +32,6 @@ public class Advertisement {
     private String exhibitionNumber;
     private String department;
     private String keyword;
-    private int period;
+    private String period;
     private int impressions;
 }

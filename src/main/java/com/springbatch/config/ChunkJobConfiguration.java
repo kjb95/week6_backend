@@ -1,20 +1,20 @@
 package com.springbatch.config;
 
-import com.springbatch.batch.CustomItemProcess;
+import com.springbatch.batch.process.CustomItemProcess;
 import com.springbatch.entity.Advertisement;
-import com.springbatch.repository.AdvertisementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.database.builder.JpaItemWriterBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -41,14 +41,15 @@ public class ChunkJobConfiguration {
         return stepBuilderFactory.get("chunkStep")
                 .<Advertisement, Advertisement>chunk(1000)
                 .reader(itemReader())
-                .processor(itemProcess())
+                .processor(itemProcess(null))
                 .writer(itemWriter())
                 .build();
     }
 
     @Bean
-    public ItemProcessor itemProcess() {
-        return new CustomItemProcess();
+    @StepScope
+    public CustomItemProcess itemProcess(@Value("#{jobParameters[date]}") String date) {
+        return new CustomItemProcess(date);
     }
 
     @Bean

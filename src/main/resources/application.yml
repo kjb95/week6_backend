@@ -9,8 +9,10 @@ spring:
   batch:
     jdbc:
       initialize-schema: always
+      isolation-level-for-create: default
     job:
       names: ${job.name:NONE}
   jpa:
     hibernate:
       ddl-auto: create-drop
+    open-in-view: true
