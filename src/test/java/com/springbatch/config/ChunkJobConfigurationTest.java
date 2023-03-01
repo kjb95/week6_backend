@@ -1,5 +1,7 @@
 package com.springbatch.config;
 
+import com.springbatch.batch.listener.CustomListener;
+import com.springbatch.batch.process.CustomItemProcess;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.BatchStatus;
@@ -11,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBatchTest
-@SpringBootTest(classes = {ChunkJobConfiguration.class, TestBatchConfiguration.class})
+@SpringBootTest(classes = {ChunkJobConfiguration.class, TestBatchConfiguration.class, CustomListener.class, CustomItemProcess.class})
 class ChunkJobConfigurationTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
